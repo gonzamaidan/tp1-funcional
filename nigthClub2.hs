@@ -27,4 +27,39 @@ agregaAmigo cliente amigo = cliente { amigos = (amigo:(amigos cliente))}
 agregarAmigo cliente amigo	| sonMismoCliente cliente amigo = cliente
 							| noEsAmigo cliente amigo = (agregaAmigo cliente amigo)
 							| otherwise = cliente
-							
+
+type Bebida = Cliente -> Cliente
+type CambioResistencia = Int -> Cliente -> Cliente
+
+cambiarResistencia :: CambioResistencia
+aumentarResistencia :: CambioResistencia
+bajarResistencia :: CambioResistencia
+
+cambiarResistencia nuevaResistencia cliente = cliente { resistencia = nuevaResistencia }
+aumentarResistencia nuevaResistencia cliente= cambiarResistencia (resistencia cliente + nuevaResistencia) cliente
+bajarResistencia nuevaResistencia cliente = cambiarResistencia (max 0 (resistencia cliente - nuevaResistencia)) cliente
+bajarResistenciaConAmigos nuevaResistencia cliente = cliente { resistencia = resistencia cliente - nuevaResistencia, amigos = map (bajarResistencia nuevaResistencia) (amigos cliente)}
+
+grog :: Bebida
+grog = cambiarResistencia 0
+
+jarraLoca :: Bebida
+jarraLoca cliente = (bajarResistenciaConAmigos 10 cliente)
+
+klusner:: String -> Bebida 
+klusner gusto cliente = bajarResistencia (length gusto) cliente
+
+cantidadAmigos = length.amigos
+tintico :: Bebida
+tintico cliente = aumentarResistencia (((*5).cantidadAmigos) cliente) cliente
+
+agregarANombre texto cliente = cliente { nombre = texto ++ (nombre cliente)} 
+
+soda :: Int -> Bebida
+soda fuerza = agregarANombre ("e" ++ (concat.replicate fuerza) "r" ++ "p") 
+
+rescatarse :: Int -> Cliente -> Cliente
+rescatarse horas 	| ( horas > 3 ) = aumentarResistencia 200
+					| ( horas > 0 ) = aumentarResistencia 100
+
+
