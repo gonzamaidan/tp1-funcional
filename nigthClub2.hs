@@ -1,3 +1,5 @@
+module TP where
+
 data Cliente = Cliente {
 						nombre:: String,
 						resistencia:: Int,
@@ -28,6 +30,8 @@ agregarAmigo cliente amigo	| sonMismoCliente cliente amigo = cliente
 							| noEsAmigo cliente amigo = (agregaAmigo cliente amigo)
 							| otherwise = cliente
 
+							
+
 type Bebida = Cliente -> Cliente
 type CambioResistencia = Int -> Cliente -> Cliente
 
@@ -50,6 +54,7 @@ klusner:: String -> Bebida
 klusner gusto cliente = bajarResistencia (length gusto) cliente
 
 cantidadAmigos = length.amigos
+
 tintico :: Bebida
 tintico cliente = aumentarResistencia (((*5).cantidadAmigos) cliente) cliente
 
@@ -58,8 +63,12 @@ agregarANombre texto cliente = cliente { nombre = texto ++ (nombre cliente)}
 soda :: Int -> Bebida
 soda fuerza = agregarANombre ("e" ++ (concat.replicate fuerza) "r" ++ "p") 
 
+
 rescatarse :: Int -> Cliente -> Cliente
 rescatarse horas 	| ( horas > 3 ) = aumentarResistencia 200
 					| ( horas > 0 ) = aumentarResistencia 100
 
+					
+comoEstaDespuesTomar:: Bebida -> Cliente -> String 
+comoEstaDespuesTomar bebida = (comoEsta.bebida)
 
