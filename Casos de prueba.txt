@@ -95,3 +95,46 @@ Luego de evaluar el itinerario de Ana, queda con 196 de resistencia, como amigos
 Consola: ((klusner "huevo").(rescatarse 2).(klusner "chocolate").jarraLoca) ana
 Salida: Cliente {nombre = "Ana", resistencia = 196, amigos = [Cliente {nombre = "Marcos", resistencia = 30, amigos = [Cliente {nombre = "Rodri", resistencia = 55, amigos = []}]},Cliente {nombre = "Rodri", resistencia = 45, amigos = []}]}
 
+Otros tests:
+
+comoEsta ana
+"fresco"
+
+(comoEsta.grog) ana
+"piola"
+
+(comoEsta.grog) rodri
+"duro"
+
+sonMismoCliente ana ana
+True
+
+sonMismoCliente ana rodri
+False
+
+noEsAmigo rodri marcos
+True
+
+noEsAmigo marcos rodri
+False
+
+(resistencia.cambiarResistencia 2) ana
+2
+
+(resistencia.aumentarResistencia 2) ana
+122
+
+(resistencia.bajarResistencia 2) ana
+118
+
+(resistencia.bajarResistencia 200) ana
+0
+
+comoEstaDespuesTomar grog ana
+"piola"
+
+comoEstaDespuesTomar grog rodri
+"duro"
+
+comoEstaDespuesTomar jarraLoca ana
+"fresco"

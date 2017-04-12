@@ -12,8 +12,8 @@ cristian = Cliente "Cristian" 2 []
 ana = Cliente "Ana" 120 [marcos, rodri]
 
 comoEsta :: Cliente -> String
-comoEsta cliente	| (>50) (resistencia cliente) = "fresco"
-					| (>1) (length (amigos cliente)) = "piola"
+comoEsta cliente	| ((>50).resistencia) cliente = "fresco"
+					| ((>1).length.amigos) cliente = "piola"
 					| otherwise = "duro"
 					
 					
